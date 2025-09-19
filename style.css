@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Electronics Store</title>
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: #f9f9f9;
+  }
+
+  /* Header */
+  header {
+    background: #2c3e50;
+    color: white;
+    padding: 1em 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  header nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  @media (max-width: 600px) {
+    header nav {
+      width: 100%;
+      margin-top: 10px;
+    }
+    header nav a {
+      display: block;
+      margin: 5px 0;
+    }
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 60px 20px;
+    background: #3498db;
+    color: white;
+  }
+  .hero button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    margin-top: 15px;
+    background: #e67e22;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  .hero button:hover {
+    transform: scale(1.05);
+    background: #d35400;
+  }
+
+  /* Products Section */
+  .products {
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .product-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  }
+  .product-card img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  .product-card h3 { margin: 10px 0 5px 0; }
+  .product-card p { margin: 5px 0; color: #555; font-size: 0.9em; }
+  .product-card .buy-button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .product-card .buy-button:hover {
+    background: #219150;
+  }
+
+  @media (max-width: 600px) {
+    .products { grid-template-columns: 1fr; }
+    .product-card { width: 100%; }
+  }
+
+  /* About Section */
+  .about {
+    padding: 60px 20px;
+    background: #ecf0f1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .about.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .about h2 { margin-bottom: 20px; }
+  .about p { max-width: 600px; margin: 0 auto; line-height: 1.6; color: #333; }
+
+  /* Contact Section */
+  .contact {
+    padding: 60px 20px;
+    background: #f9f9f9;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .contact.visible { opacity: 1; transform: translateY(0); }
+  .contact h2 { margin-bottom: 20px; }
+  .contact form { max-width: 500px; margin: 0 auto; text-align: left; }
+  .contact input, .contact textarea {
+    width: 100%; padding: 10px; margin-bottom: 15px;
+    border-radius: 6px; border: 1px solid #ccc; font-size: 1em;
+  }
+  .contact button {
+    padding: 10px 20px; background: #27ae60; color: white;
+    border: none; border-radius: 6px; cursor: pointer;
+  }
+  .contact button:hover { background: #219150; }
+
+  /* Footer */
+  footer {
+    background: #2c3e50;
+    color: white;
+    padding: 15px;
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>My Online Store</h1>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome to our Electronics Store</h2>
+    <p>Find amazing gadgets at great prices!</p>
+    <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'});">Shop Now</button>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="products">
+    <h2>Our Products</h2>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200?text=Headphones" alt="Wireless Headphones">
+      <h3>Wireless Headphones</h3>
+      <p>$49.99</p>
+      <p>High-quality headphones with noise cancellation.</p>
+      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank" onsubmit="alert('Thank you! Redirecting to PayPal.');">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="YOUR_SANDBOX_BUSINESS_EMAIL">
+        <input type="hidden" name="item_name" value="Wireless Headphones">
+        <input type="hidden" name="amount" value="49.99">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="submit" value="Buy Now" class="buy-button">
+      </form>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200?text=Speaker" alt="Bluetooth Speaker">
+      <h3>Bluetooth Speaker</h3>
+      <p>$59.99</p>
+      <p>Portable speaker with crystal-clear sound.</p>
+      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank" onsubmit="alert('Thank you! Redirecting to PayPal.');">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="YOUR_SANDBOX_BUSINESS_EMAIL">
+        <input type="hidden" name="item_name" value="Bluetooth Speaker">
+        <input type="hidden" name="amount" value="59.99">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="submit" value="Buy Now" class="buy-button">
+      </form>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200?text=Smartwatch" alt="Smart Watch">
+      <h3>Smart Watch</h3>
+      <p>$79.99</p>
+      <p>Track fitness and receive notifications on your wrist.</p>
+      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank" onsubmit="alert('Thank you! Redirecting to PayPal.');">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="YOUR_SANDBOX_BUSINESS_EMAIL">
+        <input type="hidden" name="item_name" value="Smart Watch">
+        <input type="hidden" name="amount" value="79.99">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="submit" value="Buy Now" class="buy-button">
+      </form>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200?text=Mouse" alt="Wireless Mouse">
+      <h3>Wireless Mouse</h3>
+      <p>$29.99</p>
+      <p>Ergonomic mouse with smooth tracking and long battery life.</p>
+      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank" onsubmit="alert('Thank you! Redirecting to PayPal.');">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="YOUR_SANDBOX_BUSINESS_EMAIL">
+        <input type="hidden" name="item_name" value="Wireless Mouse">
+        <input type="hidden" name="amount" value="29.99">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="submit" value="Buy Now" class="buy-button">
+      </form>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Our Store</h2>
+    <p>We provide high-quality electronics at affordable prices. Our mission is to make technology accessible and enjoyable for everyone.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required><br>
+      <input type="email" placeholder="Your Email" required><br>
+      <textarea placeholder="Your Message" rows="5" required></textarea><br>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 My Online Store | Contact: info@myshop.com</p>
+  </footer>
+
+  <!-- Fade-in JS -->
+  <script>
+    const cards = document.querySelectorAll('.product-card');
+    const sections = document.querySelectorAll('section, .product-card');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => observer.observe(section));
+    cards.forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>
